@@ -1,18 +1,16 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import InsertDriveFileOutlinedIcon from '@material-ui/icons/InsertDriveFileOutlined';
-import {  Select } from "@material-ui/core";
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Toolbar from '@material-ui/core/Toolbar';
-import AppBar from '@material-ui/core/AppBar';
-
-import Typography from '@material-ui/core/Typography';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import InsertDriveFileOutlinedIcon from "@material-ui/icons/InsertDriveFileOutlined";
+import { Select } from "@material-ui/core";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import IconButton from "@material-ui/core/IconButton";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import Toolbar from "@material-ui/core/Toolbar";
+import AppBar from "@material-ui/core/AppBar";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -22,54 +20,42 @@ const useStyles = makeStyles((theme) => ({
     width: 500,
   },
   sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
     },
   },
   sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
+    display: "flex",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
     },
-  }
-
+  },
 }));
 
-export default function AppNavbar() {
+export default function AppNavbar(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-    const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
   const isMenuOpen = Boolean(anchorEl);
-  // const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  // const handleMobileMenuClose = () => {
-  //   setMobileMoreAnchorEl(null);
-  // };
-
   const handleMenuClose = () => {
     setAnchorEl(null);
-    // handleMobileMenuClose();
   };
 
-  // const handleMobileMenuOpen = (event) => {
-  //   setMobileMoreAnchorEl(event.currentTarget);
-  // };
-
-  const menuId = 'primary-search-account-menu';
+  const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={menuId}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
@@ -78,17 +64,17 @@ export default function AppNavbar() {
     </Menu>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={mobileMenuId}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       // open={isMobileMenuOpen}
       // onClose={handleMobileMenuClose}
-    > 
+    >
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -101,26 +87,33 @@ export default function AppNavbar() {
       </MenuItem>
     </Menu>
   );
- 
-  return ( <div className={classes.grow} >
-      <AppBar position="static" color ="rgb(255,255,255)">
+
+  return (
+    <div className={classes.grow}>
+      <AppBar position="static" color="rgb(255,255,255)">
         <Toolbar>
-          
-        <BottomNavigation
-      value={value}
-      onChange={(event, newValue) => {
-        setValue(newValue);
-      }}
-      showLabels
-      className={classes.root}
-    >
-      <BottomNavigationAction label="My Wishlists" icon={<FavoriteBorderIcon />} />
-      <BottomNavigationAction label="My products" icon={<InsertDriveFileOutlinedIcon />} />
-      </BottomNavigation>
-             <div className={classes.grow} />
+          <BottomNavigation
+            value={value}
+            onChange={(event, newValue) => {
+              setValue(newValue);
+            }}
+            showLabels
+            className={classes.root}
+          >
+            <BottomNavigationAction
+              label="My Wishlists"
+              onClick={() => props.hideComponent("showSidebarWishlist")}
+              icon={<FavoriteBorderIcon />}
+            />
+            <BottomNavigationAction
+              label="My products"
+              onClick={() => props.hideComponent("showSidebarProductList")}
+              icon={<InsertDriveFileOutlinedIcon />}
+            />
+          </BottomNavigation>
+          <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            
-          <IconButton
+            <IconButton
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
@@ -131,56 +124,30 @@ export default function AppNavbar() {
               <AccountCircle />
             </IconButton>
 
-         <Select
-          // onClose={this.handleClose}
-          // onOpen={this.handleOpen}
-          // inputProps={{
-          //   name: "language",
-          //   id: "language-native-simple",
-          // }}
-          // onChange={(e) => changeLanguage(e.target.value)}
-          // value={language}
-          style={{
-            color: "rgb(0, 0, 0)",
-            fontSize: 15,
-            border: "none",
-          }}
-        >
-          <MenuItem value="TND">TND</MenuItem>
-          <MenuItem value="USD">USD</MenuItem>
-          <MenuItem value="EURO">EURO</MenuItem>
-    </Select>
-
+            <Select
+              // onClose={this.handleClose}
+              // onOpen={this.handleOpen}
+              // inputProps={{
+              //   name: "language",
+              //   id: "language-native-simple",
+              // }}
+              // onChange={(e) => changeLanguage(e.target.value)}
+              // value={language}
+              style={{
+                color: "rgb(0, 0, 0)",
+                fontSize: 15,
+                border: "none",
+              }}
+            >
+              <MenuItem value="TND">TND</MenuItem>
+              <MenuItem value="USD">USD</MenuItem>
+              <MenuItem value="EURO">EURO</MenuItem>
+            </Select>
           </div>
-          
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
     </div>
-
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
