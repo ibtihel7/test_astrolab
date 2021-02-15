@@ -19,14 +19,14 @@ class Home extends Component {
     switch (name) {
       case "showSidebarWishlist":
         this.setState({
-          showSidebarWishlist: !this.state.showSidebarWishlist,
-          showSidebarProductList: !this.state.showSidebarProductList,
+          showSidebarWishlist: true,
+          showSidebarProductList: false,
         });
         break;
       case "showSidebarProductList":
         this.setState({
-          showSidebarProductList: !this.state.showSidebarProductList,
-          showSidebarWishlist: !this.state.showSidebarWishlist,
+          showSidebarProductList: true,
+          showSidebarWishlist: false,
         });
         break;
       default:
