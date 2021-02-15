@@ -25,6 +25,7 @@ class FormDialogAddProduct extends Component {
     open: false,
     data: {
       name: "",
+      imageUrl:"",
       price: "",
       currency: "",
       description: "",
@@ -81,12 +82,15 @@ class FormDialogAddProduct extends Component {
                 <Grid container>
                 <Grid item md={12} xs={12 } style ={{ textAlign: 'center'}}>
 
-                <input accept="image/*" style={{ display: 'none'}}  id="icon-button-file" type="file" />
+                 <input accept="image/*" style={{ display: 'none'}}  id="icon-button-file" type="file" />
       <label htmlFor="icon-button-file">
         <IconButton color="primary" aria-label="upload picture" component="span">
           <PhotoCamera />
         </IconButton>
-      </label>
+      </label> 
+
+{/* <img src={url} />    */}
+
 </Grid>
 
                   <Grid item md={5} xs={8}>
@@ -123,12 +127,15 @@ class FormDialogAddProduct extends Component {
                   </Grid>
 
                   <Grid item md={3} xs={8}>
+                    <FormControl fullWidth >
                       <InputLabel
+                      
                         shrink
                         id="demo-simple-select-placeholder-label-label"
                       >
                         Currency
                       </InputLabel>
+                      
                       <Select
                         labelId="demo-simple-select-placeholder-label-label"
                         id="demo-simple-select-placeholder-label"
@@ -141,6 +148,7 @@ class FormDialogAddProduct extends Component {
                         <MenuItem value={"EURO"}>EURO</MenuItem>
                         <MenuItem value={"USD"}>USD</MenuItem>
                       </Select>
+                      </FormControl>
                   </Grid>
                   <Grid item md={12} xs={12}>
                   <InputLabel
@@ -159,9 +167,9 @@ class FormDialogAddProduct extends Component {
                     />
                   </Grid>
                   <Grid item md={7} xs={8}>
-                    <FormControl>
+                    <FormControl fullWidth >
                       <InputLabel
-                        shrink
+                      
                         id="demo-simple-select-placeholder-label-label"
                       >
                         Wishlist
@@ -186,7 +194,7 @@ class FormDialogAddProduct extends Component {
                   </Grid>
 
                   <Grid item md={5} xs={8}>
-                    <FormControl>
+                    <FormControl fullWidth>
                       <InputLabel
                         shrink
                         id="demo-simple-select-placeholder-label-label"

@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     width: 500,
+    border: 1,
   },
   sectionDesktop: {
     display: 'none',
@@ -84,7 +85,7 @@ export default function Navbar2() {
   );
  
   return ( <div className={classes.grow} >
-      <AppBar position="static" color ="rgb(255,255,255)">
+      <AppBar position="static"  color ="rgb(255,255,255)">
         <Toolbar>
           
         <BottomNavigation

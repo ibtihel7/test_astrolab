@@ -1,10 +1,26 @@
+import img1 from '../Images/step.jpg' 
+import img2 from '../Images/nike.jpg' 
+
 var products=[
     {   _id:'101',
         name:'Product 1',
+        image: img1,
+        price:'200 ',
+        currency:'TND',
+        description :'Sport product',
+        status :'To buy',
+        wishlist:' wishlist1'
        
     },
     {   _id:'102',
         name:'Product 2',
+        image: img2,
+        price:'300 ',
+        currency:'TND',
+        description :'Sport product',
+        status :'Bought',
+        wishlist:' wishlist2'
+
        
     }
 ]
