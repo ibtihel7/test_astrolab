@@ -90,7 +90,7 @@ export default function AppNavbar(props) {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" color="rgb(255,255,255)">
+      <AppBar position="static" color="transparent">
         <Toolbar>
           <BottomNavigation
             value={value}

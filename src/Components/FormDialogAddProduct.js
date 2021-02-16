@@ -17,22 +17,26 @@ import {
 } from "@material-ui/core";
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-
 import { connect } from "react-redux";
 
 class FormDialogAddProduct extends Component {
-  state = {
+  constructor(props) {
+    super(props) 
+  this.state = {
     open: false,
-    data: {
       name: "",
       imageUrl:"",
       price: "",
       currency: "",
       description: "",
-      wishlist: "",
+      // wishlist: "",
       status: "",
-    },
+  
+     
   };
+}
+  
+
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -45,6 +49,13 @@ class FormDialogAddProduct extends Component {
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
+    });
+  };
+  
+  handleWishlistChange = (e) => {
+    const { wishlists } = this.props;
+    this.setState({
+      [e.target.name]: wishlists.find(el=>el._id == e.target.value).name,
     });
   };
 
@@ -92,7 +103,6 @@ class FormDialogAddProduct extends Component {
 {/* <img src={url} />    */}
 
 </Grid>
-
                   <Grid item md={5} xs={8}>
                     <InputLabel
                         // shrink
@@ -108,7 +118,6 @@ class FormDialogAddProduct extends Component {
                         onChange={this.handleChange}
                       />
                   </Grid>
-
                   <Grid item md={4} xs={8}>
                     <InputLabel
                         shrink
@@ -135,20 +144,23 @@ class FormDialogAddProduct extends Component {
                       >
                         Currency
                       </InputLabel>
-                      
                       <Select
                         labelId="demo-simple-select-placeholder-label-label"
                         id="demo-simple-select-placeholder-label"
                         value={this.state.currency}
+                        name='currency'
                         onChange={this.handleChange}
                         displayEmpty
                         width={1}
+
                       >
                         <MenuItem value={"TND"}>TND</MenuItem>
                         <MenuItem value={"EURO"}>EURO</MenuItem>
                         <MenuItem value={"USD"}>USD</MenuItem>
                       </Select>
+                      
                       </FormControl>
+                      
                   </Grid>
                   <Grid item md={12} xs={12}>
                   <InputLabel
@@ -176,9 +188,9 @@ class FormDialogAddProduct extends Component {
                       </InputLabel>
                       <Select
                         labelId="demo-simple-select-placeholder-label-label"
-                        id="demo-simple-select-placeholder-label"
-                        value={this.state.wishlist}
-                        onChange={this.handleChange}
+                        // id="demo-simple-select-placeholder-label"
+                        name="wishlist"
+                        onChange={this.handleWishlistChange}
                         displayEmpty
                         width={1}
                       >
@@ -192,7 +204,6 @@ class FormDialogAddProduct extends Component {
                       </Select>
                     </FormControl>
                   </Grid>
-
                   <Grid item md={5} xs={8}>
                     <FormControl fullWidth>
                       <InputLabel
@@ -204,6 +215,7 @@ class FormDialogAddProduct extends Component {
                       <Select
                         labelId="demo-simple-select-placeholder-label-label"
                         id="demo-simple-select-placeholder-label"
+                        name="status"
                         value={this.state.status}
                         onChange={this.handleChange}
                         displayEmpty
@@ -239,6 +251,8 @@ class FormDialogAddProduct extends Component {
 const mapStateToProps = (state) => {
   return {
     wishlists: state.wishlistReducer,
+    // products: state.productsReducer,
+
   };
 };
 

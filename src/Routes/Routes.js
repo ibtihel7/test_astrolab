@@ -6,7 +6,6 @@ class Routes extends Component {
         return ( 
             <div className='routes-container'>
              <Route exact path='/' component={Home}/>
-             
             </div>
          );
     }

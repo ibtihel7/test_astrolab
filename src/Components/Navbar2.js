@@ -2,16 +2,12 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import InsertDriveFileOutlinedIcon from '@material-ui/icons/InsertDriveFileOutlined';
-import {  Select } from "@material-ui/core";
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
-import Typography from '@material-ui/core/Typography';
 import AppsIcon from '@material-ui/icons/Apps';
 import ReorderIcon from '@material-ui/icons/Reorder';
 

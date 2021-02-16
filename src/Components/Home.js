@@ -7,17 +7,19 @@ import SidebarProductList from "./SidebarProductList";
 import FormDialogAddWishList from "./FormDialogAddWishList";
 import FormDialogAddProduct from "./FormDialogAddProduct";
 import Grid from "@material-ui/core/Grid";
-import ProductItem from './ProductItem'
+import ProductItem from './ProductItem';
+import img from '../Images/empty.jpg'
 class Home extends Component {
   state = {
     showSidebarWishlist: true,
     showSidebarProductList: false,
-    title :'List',
-    description :'',
-    price:'',
-    image:'',
-    wishlist:'',
-    status:''
+    title :'WishList',
+    description :'description',
+    price:'price',
+    currency:'currency',
+    image:img,
+    wishlist:'wishlist',
+    status:'status'
   };
 
   hideComponent = (name) => {
@@ -26,12 +28,20 @@ class Home extends Component {
         this.setState({
           showSidebarWishlist: true,
           showSidebarProductList: false,
+          title :'WishList',
         });
         break;
       case "showSidebarProductList":
         this.setState({
           showSidebarProductList: true,
           showSidebarWishlist: false,
+          title :'ProductList',
+          description :'Description',
+          price:'Price',
+          currency:'Currency',
+          image:img,
+          wishlist:'Wishlist',
+          status:'Status'
         });
         break;
       default:
@@ -88,8 +98,6 @@ class Home extends Component {
         status={this.state.status} 
         />
         </Grid> }
-      
-
         </Grid>
         <Grid container>
 
