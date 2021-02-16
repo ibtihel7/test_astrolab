@@ -2,8 +2,15 @@ import React, { Component } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import { connect } from "react-redux";
-
+import axios from 'axios'
 class SidebarProductList extends Component {
+
+  componentDidMount = () => {
+    axios
+      .get("/get-products")
+      .then((res) => this.props.updateproductsReducer(res.data));
+  };
+  
   render() {
     const { titleItem, products } = this.props;
     return (

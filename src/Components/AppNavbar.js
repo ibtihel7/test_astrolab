@@ -12,6 +12,8 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";
 
+import {Grid} from "@material-ui/core";
+
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -38,22 +40,32 @@ export default function AppNavbar(props) {
   const [value, setValue] = React.useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
   const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
   };
 
-  const menuId = "primary-search-account-menu";
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
+
   const renderMenu = (
+    <Grid md={4} xs={12} >
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={menuId}
       keepMounted
       transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMenuOpen}
@@ -62,18 +74,19 @@ export default function AppNavbar(props) {
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>Sign out</MenuItem>
     </Menu>
+    </Grid>
   );
+ 
 
-  const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
+    <Grid  md={8} xs={12} >
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={mobileMenuId}
       keepMounted
       transformOrigin={{ vertical: "top", horizontal: "right" }}
-      // open={isMobileMenuOpen}
-      // onClose={handleMobileMenuClose}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
     >
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -86,8 +99,9 @@ export default function AppNavbar(props) {
         </IconButton>
       </MenuItem>
     </Menu>
+    </Grid>
   );
-
+ 
   return (
     <div className={classes.grow}>
       <AppBar position="static" color="transparent">
@@ -116,7 +130,6 @@ export default function AppNavbar(props) {
             <IconButton
               edge="end"
               aria-label="account of current user"
-              aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="inherit"
@@ -146,8 +159,9 @@ export default function AppNavbar(props) {
           </div>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
+    {renderMobileMenu}
       {renderMenu}
+     
     </div>
   );
 }

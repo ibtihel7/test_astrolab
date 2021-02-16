@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import {connect} from 'react-redux'
+import axios from 'axios'
 
 class FormDialogAddWishList extends Component {
 
@@ -34,12 +35,22 @@ class FormDialogAddWishList extends Component {
       })
   }
 
-   addWishlist=()=>
-  {
-      this.props.addReducer({...this.state,_id:Math.random()*1000+''});
-      this.setState({open:false});
-  }
+  //  addWishlist=()=>
+  // {
+  //     this.props.addReducer({...this.state,_id:Math.random()*1000+''});
+  //     this.setState({open:false});
+  // }
 
+  // add axios
+  addWishlist = () => {
+    axios
+      .post("/add-wishlist", { ...this.state })
+      .then(() => this.props.addReducer({ ...this.state }))
+      .catch((err) => alert(err));
+      this.setState({open:false});
+  };
+
+// 
   render (){
   return (
     <div>

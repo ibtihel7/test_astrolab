@@ -2,8 +2,17 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import axios from 'axios'
 
 class SidebarWishlist extends Component {
+
+  componentDidMount = () => {
+    axios
+      .get("/get-wishlists")
+      .then((res) => this.props.updatewishlistReducer(res.data));
+  };
+
+
   render() {
     const { titleItem, wishlists } = this.props;
     return (

@@ -17,6 +17,11 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  bar :{
+
+    color: 'inherit',
+    backgroundColor  :"transparent"
+  }
 
 }));
 
@@ -24,7 +29,7 @@ export default function Navbar1(props) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <AppBar color = 'white' position="static">
+      <AppBar  className={classes.bar} position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             {props.titleItem}

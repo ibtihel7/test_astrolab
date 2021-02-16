@@ -17,9 +17,9 @@ import {
 } from "@material-ui/core";
 import CardMedia from '@material-ui/core/CardMedia';
 
-import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import { connect } from "react-redux";
+import  axios from 'axios'
 
 class FormDialogAddProduct extends Component {
   constructor(props) {
@@ -59,9 +59,20 @@ class FormDialogAddProduct extends Component {
     });
   };
 
+  // addProduct = () => {
+  //   this.props.addReducer({ ...this.state, _id: Math.random() * 1000 + "" });
+  //   this.setState({ open: false });
+  // };
+
+
+  
+  // add axios
   addProduct = () => {
-    this.props.addReducer({ ...this.state, _id: Math.random() * 1000 + "" });
-    this.setState({ open: false });
+    axios
+      .post("/add-product", { ...this.state })
+      .then(() => this.props.addReducer({ ...this.state }))
+      .catch((err) => alert(err));
+      this.setState({open:false});
   };
 
   render() {
@@ -266,7 +277,7 @@ class FormDialogAddProduct extends Component {
 const mapStateToProps = (state) => {
   return {
     wishlists: state.wishlistReducer,
-    // products: state.productsReducer,
+    products: state.productsReducer,
 
   };
 };
