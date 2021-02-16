@@ -15,6 +15,8 @@ import {
   List,
   TextField,
 } from "@material-ui/core";
+import CardMedia from '@material-ui/core/CardMedia';
+
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import { connect } from "react-redux";
@@ -25,14 +27,12 @@ class FormDialogAddProduct extends Component {
   this.state = {
     open: false,
       name: "",
-      imageUrl:"",
+      image:"",
       price: "",
       currency: "",
       description: "",
       // wishlist: "",
-      status: "",
-  
-     
+      status: "",   
   };
 }
   
@@ -67,6 +67,7 @@ class FormDialogAddProduct extends Component {
   render() {
     const { wishlists } = this.props;
 
+
     return (
       <div>
         <List>
@@ -91,21 +92,34 @@ class FormDialogAddProduct extends Component {
             <div>
               <div>
                 <Grid container>
-                <Grid item md={12} xs={12 } style ={{ textAlign: 'center'}}>
+                <Grid item md={12} xs={12 } style ={{ textAlign: 'center' , marginBottom:'40px'}}>
 
-                 <input accept="image/*" style={{ display: 'none'}}  id="icon-button-file" type="file" />
       <label htmlFor="icon-button-file">
-        <IconButton color="primary" aria-label="upload picture" component="span">
+        <div color="primary" aria-label="upload picture" component="span">
           <PhotoCamera />
-        </IconButton>
+        </div>
       </label> 
+      <TextField
+                        autoFocus
+                        margin="dense"
+                        id="image"
+                        name="image"
+                        onChange={this.handleChange}
+                        placeholder ="Put the Image URL"
+                      />
 
-{/* <img src={url} />    */}
 
+<CardMedia
+          component="img"
+          alt=""
+          height="100"
+          image= {this.state.image} 
+          // image= {require(image).default}
+
+        />
 </Grid>
                   <Grid item md={5} xs={8}>
                     <InputLabel
-                        // shrink
                         id="demo-simple-select-placeholder-label-label"
                       >
                         Name
@@ -136,9 +150,8 @@ class FormDialogAddProduct extends Component {
                   </Grid>
 
                   <Grid item md={3} xs={8}>
-                    <FormControl fullWidth >
-                      <InputLabel
-                      
+                    <FormControl style={{marginTop:'3px' , marginLeft:'10px'}} fullWidth >
+                      <InputLabel 
                         shrink
                         id="demo-simple-select-placeholder-label-label"
                       >
@@ -180,8 +193,8 @@ class FormDialogAddProduct extends Component {
                   </Grid>
                   <Grid item md={7} xs={8}>
                     <FormControl fullWidth >
-                      <InputLabel
-                      
+                    <InputLabel
+                        shrink
                         id="demo-simple-select-placeholder-label-label"
                       >
                         Wishlist
@@ -205,7 +218,7 @@ class FormDialogAddProduct extends Component {
                     </FormControl>
                   </Grid>
                   <Grid item md={5} xs={8}>
-                    <FormControl fullWidth>
+                    <FormControl  style={{marginLeft:'10px'}}   fullWidth>
                       <InputLabel
                         shrink
                         id="demo-simple-select-placeholder-label-label"
@@ -242,7 +255,9 @@ class FormDialogAddProduct extends Component {
               Save
             </Button>
           </DialogActions>
+          
         </Dialog>
+
       </div>
     );
   }

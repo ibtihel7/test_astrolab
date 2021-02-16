@@ -20,6 +20,9 @@ const useStyles = makeStyles({
   root: {
     display :"flex"
   },
+  disable:{
+    color: "primary"
+    }
 });
 
 
@@ -36,7 +39,7 @@ export default function ProductItem(props) {
   return ( <div>
     
     <Card className={classes.root}>
-       <Grid item md={6} xs={12 }>
+       <Grid  md={6} xs={12 }>
         <CardMedia
           component="img"
           alt=""
@@ -45,7 +48,7 @@ export default function ProductItem(props) {
         //   title="productImage"
         />
     </Grid>
-    <Grid item md={4} xs={12 }>
+    <Grid  md={4} xs={12 }>
 
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
@@ -91,13 +94,12 @@ export default function ProductItem(props) {
     </Card>
 
 <Grid item md={3} xs={12 }>
-<FormControl  fullWidth  disabled >
+<FormControl  className={classes.disable} fullWidth  disabled >
 
-<InputLabel id="demo-simple-select-disabled-label">{props.wishlist}</InputLabel>
+<InputLabel  className={classes.disable}  shrink={false} id="demo-simple-select-disabled-label">{props.wishlist}</InputLabel>
               <Select
-              
-                labelId="demo-simple-select-placeholder-label-label"
-                id="demo-simple-select-placeholder-label"
+                labelId="demo-simple-select"
+                id="demo-simple-select"
                 value={wishlist}
                 onChange={handleChange}
                 defaultValue={props.wishlist}   
@@ -108,7 +110,7 @@ export default function ProductItem(props) {
               <Grid item md={3} xs={12 }>
               <FormControl fullWidth  disabled >
 
-<InputLabel   id="demo-simple-select-disabled-label">{props.status}</InputLabel>
+<InputLabel  className={classes.disable} shrink={false}  id="demo-simple-select-disabled-label">{props.status}</InputLabel>
       <Select
         labelId="demo-simple-select-placeholder-label-label"
         id="demo-simple-select-placeholder-label"
