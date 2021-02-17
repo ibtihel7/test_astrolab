@@ -2,17 +2,16 @@ import React, { Component } from "react";
 import AppNavbar from "./AppNavbar";
 import Navbar1 from "./Navbar1";
 import Navbar2 from "./Navbar2";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import SidebarWishlist from "./SidebarWishlist";
 import SidebarProductList from "./SidebarProductList";
 import FormDialogAddWishList from "./FormDialogAddWishList";
 import FormDialogAddProduct from "./FormDialogAddProduct";
 import Grid from "@material-ui/core/Grid";
-import ProductItem from './ProductItem';
-import img from '../Images/empty.jpg'
+import ProductItem from "./ProductItem";
+import img from "../Images/empty.jpg";
 class Home extends Component {
-
   constructor() {
     super();
     let loggedIn = false;
@@ -21,21 +20,17 @@ class Home extends Component {
     if (token) loggedIn = true;
     this.state = {
       loggedIn,
+      showSidebarWishlist: true,
+      showSidebarProductList: false,
+      title: "WishList",
+      description: "description",
+      price: "price",
+      currency: "currency",
+      image: img,
+      wishlist: "wishlist",
+      status: "status",
     };
   }
-
-
-  state = {
-    showSidebarWishlist: true,
-    showSidebarProductList: false,
-    title :'WishList',
-    description :'description',
-    price:'price',
-    currency:'currency',
-    image:img,
-    wishlist:'wishlist',
-    status:'status'
-  };
 
   hideComponent = (name) => {
     switch (name) {
@@ -43,20 +38,20 @@ class Home extends Component {
         this.setState({
           showSidebarWishlist: true,
           showSidebarProductList: false,
-          title :'WishList',
+          title: "WishList",
         });
         break;
       case "showSidebarProductList":
         this.setState({
           showSidebarProductList: true,
           showSidebarWishlist: false,
-          title :'ProductList',
-          description :'Description',
-          price:'Price',
-          currency:'Currency',
-          image:img,
-          wishlist:'Wishlist',
-          status:'Status'
+          title: "ProductList",
+          description: "Description",
+          price: "Price",
+          currency: "Currency",
+          image: img,
+          wishlist: "Wishlist",
+          status: "Status",
         });
         break;
       default:
@@ -68,18 +63,17 @@ class Home extends Component {
       loggedIn: false,
     });
   };
-  dataItem =(e)=>{
+  dataItem = (e) => {
     this.setState({
       title: e.name,
-      description:e.description,
-      price:e.price,
-      currency:e.currency,
-      image:e.image,
-      wishlist:e.wishlist,
-      status:e.status
-
+      description: e.description,
+      price: e.price,
+      currency: e.currency,
+      image: e.image,
+      wishlist: e.wishlist,
+      status: e.status,
     });
-  }
+  };
   render() {
     if (this.state.loggedIn === false) {
       return <Redirect to="/logout" />;
@@ -91,44 +85,45 @@ class Home extends Component {
           <AppNavbar hideComponent={this.hideComponent} />
         </header>
         <Grid container>
-        <Grid item md={3} xs={12 }>
-        {showSidebarWishlist && <FormDialogAddWishList />}{" "}
-        {showSidebarWishlist && <SidebarWishlist  titleItem={this.dataItem}  />}
-        </Grid>
-        {showSidebarWishlist &&
-        <Grid item md={9} xs={12 }>
-        <Navbar1 titleItem={this.state.title}   />
-        <Navbar2  />
-        </Grid> }
+          <Grid item md={3} xs={12}>
+            {showSidebarWishlist && <FormDialogAddWishList />}{" "}
+            {showSidebarWishlist && (
+              <SidebarWishlist titleItem={this.dataItem} />
+            )}
+          </Grid>
+          {showSidebarWishlist && (
+            <Grid item md={9} xs={12}>
+              <Navbar1 titleItem={this.state.title} />
+              <Navbar2 />
+            </Grid>
+          )}
         </Grid>
 
         <Grid container>
+          <Grid item md={3} xs={12}>
+            {showSidebarProductList && <FormDialogAddProduct />}{" "}
+            {showSidebarProductList && (
+              <SidebarProductList titleItem={this.dataItem} />
+            )}
+          </Grid>
 
-        <Grid item md={3} xs={12 }>
-
-        {showSidebarProductList && <FormDialogAddProduct />}{" "}
-        {showSidebarProductList && <SidebarProductList titleItem={this.dataItem}  />}
+          {showSidebarProductList && (
+            <Grid item md={9} xs={12}>
+              <ProductItem
+                titleItem={this.state.title}
+                description={this.state.description}
+                price={this.state.price}
+                currency={this.state.currency}
+                image={this.state.image}
+                wishlist={this.state.wishlist}
+                status={this.state.status}
+              />
+            </Grid>
+          )}
         </Grid>
-
-        {showSidebarProductList &&
-        <Grid item md={9} xs={12 }>
-        <ProductItem titleItem={this.state.title}  
-        description={this.state.description} 
-        price={this.state.price} 
-        currency={this.state.currency} 
-        image={this.state.image} 
-        wishlist={this.state.wishlist} 
-        status={this.state.status} 
-        />
-        </Grid> }
-        </Grid>
-      
-
-        {/* <Navv/> */}
       </div>
     );
   }
 }
 
 export default Home;
- 
