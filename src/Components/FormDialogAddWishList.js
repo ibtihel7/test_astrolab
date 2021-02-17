@@ -52,8 +52,7 @@ class FormDialogAddWishList extends Component {
 
 // 
   render (){
-  return (
-    <div>
+  return ( <div  >
       <List>
         <ListItem>
           <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>

@@ -15,10 +15,13 @@ import ReorderIcon from '@material-ui/icons/Reorder';
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
+    
+
   },
   root: {
     width: 500,
     border: 1,
+
   },
   sectionDesktop: {
     display: 'none',

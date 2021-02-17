@@ -18,6 +18,8 @@ import { Grid } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
+    border :'1px'
+
   },
   root: {
     width: 500,

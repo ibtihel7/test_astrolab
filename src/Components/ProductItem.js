@@ -18,10 +18,13 @@ import {
 
 const useStyles = makeStyles({
   root: {
-    display :"flex"
+    display :"flex" ,
   },
   disable:{
-    color: "inherit !important" 
+    color: "inherit !important" ,
+    marginLeft: "50px" ,
+    marginBottom: "20px",
+
     }
 });
 
@@ -62,7 +65,7 @@ export default function ProductItem(props) {
         </CardContent>
         <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-        {props.price} { props.currency}
+        Price : {props.price} { props.currency}
       
           </Typography>
           </CardContent>
@@ -111,7 +114,7 @@ export default function ProductItem(props) {
               </FormControl>
               </Grid>
               <Grid item md={3} xs={12 }>
-              <FormControl fullWidth  disabled >
+              <FormControl className={classes.disable} fullWidth  disabled >
 
 <InputLabel  className={classes.disable} shrink={false}  id="demo-simple-select-disabled-label">{props.status}</InputLabel>
       <Select

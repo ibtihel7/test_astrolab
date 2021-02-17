@@ -84,31 +84,32 @@ class Home extends Component {
         <header>
           <AppNavbar hideComponent={this.hideComponent} />
         </header>
-        <Grid container>
-          <Grid item md={3} xs={12}>
+        <section >
+        <Grid  container>
+          <Grid  style={{borderStyle:'ridge' ,  borderWidth: "thin medium"}} item md={3} xs={12}>
             {showSidebarWishlist && <FormDialogAddWishList />}{" "}
             {showSidebarWishlist && (
               <SidebarWishlist titleItem={this.dataItem} />
             )}
           </Grid>
           {showSidebarWishlist && (
-            <Grid item md={9} xs={12}>
+            <Grid   item md={9} xs={12}>
               <Navbar1 titleItem={this.state.title} />
-              <Navbar2 />
+              <Navbar2  />
             </Grid>
           )}
         </Grid>
 
         <Grid container>
-          <Grid item md={3} xs={12}>
+          <Grid    style={{borderStyle:'ridge' ,  borderWidth: " medium"}} item md={3} xs={12}>
             {showSidebarProductList && <FormDialogAddProduct />}{" "}
             {showSidebarProductList && (
-              <SidebarProductList titleItem={this.dataItem} />
+              <SidebarProductList    titleItem={this.dataItem} />
             )}
           </Grid>
 
           {showSidebarProductList && (
-            <Grid item md={9} xs={12}>
+            <Grid   style={{borderStyle:'ridge' ,  borderWidth: "medium"}} item md={9} xs={12}>
               <ProductItem
                 titleItem={this.state.title}
                 description={this.state.description}
@@ -121,6 +122,7 @@ class Home extends Component {
             </Grid>
           )}
         </Grid>
+        </section>
       </div>
     );
   }
