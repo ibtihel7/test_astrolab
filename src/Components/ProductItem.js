@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     display :"flex"
   },
   disable:{
-    color: "primary"
+    color: "inherit !important" 
     }
 });
 
@@ -97,7 +97,7 @@ export default function ProductItem(props) {
     </Card>
 
 <Grid item md={3} xs={12 }>
-<FormControl  className={classes.disable} fullWidth  disabled >
+<FormControl disabled className={classes.disable} fullWidth   >
 
 <InputLabel  className={classes.disable}  shrink={false} id="demo-simple-select-disabled-label">{props.wishlist}</InputLabel>
               <Select
