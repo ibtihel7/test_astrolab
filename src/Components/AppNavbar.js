@@ -62,7 +62,7 @@ export default function AppNavbar(props) {
   };
 
   const renderMenu = (
-    <Grid md={4} xs={12} >
+    <Grid item md={4} xs={12} >
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
@@ -79,7 +79,7 @@ export default function AppNavbar(props) {
  
 
   const renderMobileMenu = (
-    <Grid  md={8} xs={12} >
+    <Grid item md={8} xs={12} >
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}

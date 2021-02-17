@@ -1,14 +1,62 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const { ObjectID, MongoClient } = require("mongodb");
-
 const assert = require("assert");
+const jwt = require("jsonwebtoken");
 const app = express();
+const SECRETKEY = "ibtihel";
 app.use(bodyParser.json());
 
 const MongoUrl = "mongodb://localhost:27017";
 const database = "astrolab";
 
+
+// login
+
+const verifyTheToken = (req, res, next) => {
+  // getting the token from the header
+  const bearer = req.headers["authorization"];
+  if (bearer) {
+    const bearerToken = bearer.split(" ");
+    const token = bearerToken[1];
+
+    jwt.verify(token, SECRETKEY, (err, data) => {
+      if (err) {
+        res.sendStatus(403);
+      } else {
+        req.userData = data;
+        next();
+      }
+    });
+  } else {
+    res.sendStatus(403);
+  }
+};
+
+app.post("/login", (req, res) => {
+  console.log("got the request");
+  // check for the username and password
+  console.log(req.body);
+  const { username, password } = req.body;
+
+  // database authenticate username and password
+  if (username === "astrolab" && password === "astrolab") {
+    const user = {
+      username,
+    };
+    jwt.sign({ user }, SECRETKEY, (err, token) => {
+      if (err) {
+        res.sendStatus(403);
+      } else {
+        res.json({
+          token,
+        });
+      }
+    });
+  } else {
+    res.sendStatus(403);
+  }
+});
 
 MongoClient.connect(MongoUrl, { useNewUrlParser: true }, (err, client) => {
   assert.equal(null, err, "can not connect to database");

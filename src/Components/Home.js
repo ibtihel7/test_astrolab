@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import AppNavbar from "./AppNavbar";
 import Navbar1 from "./Navbar1";
 import Navbar2 from "./Navbar2";
+import { Link, Redirect } from "react-router-dom";
+
 import SidebarWishlist from "./SidebarWishlist";
 import SidebarProductList from "./SidebarProductList";
 import FormDialogAddWishList from "./FormDialogAddWishList";
@@ -10,6 +12,19 @@ import Grid from "@material-ui/core/Grid";
 import ProductItem from './ProductItem';
 import img from '../Images/empty.jpg'
 class Home extends Component {
+
+  constructor() {
+    super();
+    let loggedIn = false;
+
+    const token = localStorage.getItem("token");
+    if (token) loggedIn = true;
+    this.state = {
+      loggedIn,
+    };
+  }
+
+
   state = {
     showSidebarWishlist: true,
     showSidebarProductList: false,
@@ -48,6 +63,11 @@ class Home extends Component {
     }
   };
 
+  logout = () => {
+    this.setState({
+      loggedIn: false,
+    });
+  };
   dataItem =(e)=>{
     this.setState({
       title: e.name,
@@ -61,6 +81,9 @@ class Home extends Component {
     });
   }
   render() {
+    if (this.state.loggedIn === false) {
+      return <Redirect to="/logout" />;
+    }
     const { showSidebarWishlist, showSidebarProductList } = this.state;
     return (
       <div className="home-container">
@@ -99,9 +122,7 @@ class Home extends Component {
         />
         </Grid> }
         </Grid>
-        <Grid container>
-
-</Grid>
+      
 
         {/* <Navv/> */}
       </div>

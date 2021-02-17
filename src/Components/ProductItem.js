@@ -36,10 +36,12 @@ export default function ProductItem(props) {
     setWishlist(event.target.value);
     setStatus(event.target.value)
   };
+
+
   return ( <div>
     
     <Card className={classes.root}>
-       <Grid  md={6} xs={12 }>
+       <Grid  item md={6} xs={12 }>
         <CardMedia
           component="img"
           alt=""
@@ -48,7 +50,7 @@ export default function ProductItem(props) {
         //   title="productImage"
         />
     </Grid>
-    <Grid  md={4} xs={12 }>
+    <Grid item  md={4} xs={12 }>
 
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
@@ -84,7 +86,8 @@ export default function ProductItem(props) {
         variant="text"
         color="secondary"
         className={classes.button}
-        startIcon={<DeleteOutlineIcon />}
+        startIcon={<DeleteOutlineIcon 
+        />}
       >
         Delete
       </Button>
@@ -121,7 +124,6 @@ export default function ProductItem(props) {
       </Select>
       </FormControl>
       </Grid>
-
 </div>
   );
 }

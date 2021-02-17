@@ -278,7 +278,6 @@ const mapStateToProps = (state) => {
   return {
     wishlists: state.wishlistReducer,
     products: state.productsReducer,
-
   };
 };
 
