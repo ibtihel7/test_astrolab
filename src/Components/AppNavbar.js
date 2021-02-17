@@ -11,8 +11,9 @@ import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";
-
-import {Grid} from "@material-ui/core";
+import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -21,17 +22,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: 500,
   },
-  sectionDesktop: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
-  },
-  sectionMobile: {
+  sectionNav: {
     display: "flex",
-    [theme.breakpoints.up("md")]: {
-      display: "none",
-    },
   },
 }));
 
@@ -40,10 +32,10 @@ export default function AppNavbar(props) {
   const [value, setValue] = React.useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  const [loggedIn, setLoggedIn] = React.useState(false);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
+  let history = useHistory();
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -57,51 +49,55 @@ export default function AppNavbar(props) {
     handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
+  const logout = () => {
+    setLoggedIn(false);
+    history.push("/logout");
   };
 
   const renderMenu = (
-    <Grid item md={4} xs={12} >
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Sign out</MenuItem>
-    </Menu>
+    <Grid item md={4} xs={12}>
+      <Menu
+        anchorEl={anchorEl}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        keepMounted
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
+        open={isMenuOpen}
+        onClose={handleMenuClose}
+      >
+        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+        <MenuItem onClick={logout}>Sign out</MenuItem>
+      </Menu>
     </Grid>
   );
- 
 
   const renderMobileMenu = (
-    <Grid item md={8} xs={12} >
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          // color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-      </MenuItem>
-    </Menu>
+    <Grid item md={8} xs={12}>
+      <Menu
+        anchorEl={mobileMoreAnchorEl}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        keepMounted
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
+        open={isMobileMenuOpen}
+        onClose={handleMobileMenuClose}
+      >
+        <MenuItem onClick={handleProfileMenuOpen}>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            // color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+        </MenuItem>
+      </Menu>
     </Grid>
   );
- 
+
+  if ({ loggedIn } === false) {
+    return <Redirect to="/logout" />;
+  }
+
   return (
     <div className={classes.grow}>
       <AppBar position="static" color="transparent">
@@ -126,9 +122,8 @@ export default function AppNavbar(props) {
             />
           </BottomNavigation>
           <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
+          <div className={classes.sectionNav}>
             <IconButton
-              edge="end"
               aria-label="account of current user"
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
@@ -136,16 +131,7 @@ export default function AppNavbar(props) {
             >
               <AccountCircle />
             </IconButton>
-
             <Select
-              // onClose={this.handleClose}
-              // onOpen={this.handleOpen}
-              // inputProps={{
-              //   name: "language",
-              //   id: "language-native-simple",
-              // }}
-              // onChange={(e) => changeLanguage(e.target.value)}
-              // value={language}
               style={{
                 color: "rgb(0, 0, 0)",
                 fontSize: 15,
@@ -159,9 +145,8 @@ export default function AppNavbar(props) {
           </div>
         </Toolbar>
       </AppBar>
-    {renderMobileMenu}
+      {renderMobileMenu}
       {renderMenu}
-     
     </div>
   );
 }
